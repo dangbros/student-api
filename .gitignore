@@ -1,0 +1,45 @@
+# Binary Identifiers
+# ------------------
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output directory for builds
+# ------------------
+bin/
+dist/
+
+# Project Specific Binaries
+# ------------------
+# Replace 'my-app' with your actual project name if you build to the root
+/[your-project-binary-name]
+
+# Dependencies
+# ------------------
+# It is generally recommended to NOT ignore vendor/ if you want to
+# ensure reproducible builds without hitting a proxy,
+# but many modern projects ignore it.
+# vendor/
+
+# Go Modules
+# ------------------
+# Do NOT ignore go.mod or go.sum
+
+# IDE / Editor Private Files
+# ------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Environment & Secrets
+# ------------------
+.env
+.env.local
+*.log
