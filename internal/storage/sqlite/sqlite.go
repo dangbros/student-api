@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/dangbros/student-api/internal/config"
+	"github.com/dangbros/student-api/internal/storage"
 	"github.com/dangbros/student-api/internal/types"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -102,4 +103,28 @@ func (s *Sqlite) GetStudents() ([]types.Student, error) {
 	}
 
 	return students, nil
+}
+
+func (s *Sqlite) DeleteStudent(id int64) error {
+	stmt, err := s.Db.Prepare("DELETE FROM students WHERE id = ?")
+	if err != nil {
+		return fmt.Errorf("prepare delete student: %w", err)
+	}
+
+	defer stmt.Close()
+
+	result, err := stmt.Exec(id)
+	if err != nil {
+		return fmt.Errorf("delete student exec: %w", err)
+	}
+
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("rows affected delete student: %w", err)
+	}
+	if rows == 0 {
+		return storage.ErrStudentNotFound
+	}
+
+	return nil
 }
